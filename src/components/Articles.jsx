@@ -10,6 +10,7 @@ export default function Articles() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    setIsLoading(true)
     getAllArticles()
       .then(({ data: { articles } }) => {
         setArticles(articles)
