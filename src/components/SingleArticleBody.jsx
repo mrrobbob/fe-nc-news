@@ -7,7 +7,5 @@ export default function SingleArticleBody({article: { title, author, body}}) {
 
 
     </>
-
   )
-
 }

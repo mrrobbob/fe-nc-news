@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom"
 import { UserContext } from "../contexts/UserContext"
 import SingleArticleBody from "./SingleArticleBody"
 import Comments from "./Comments"
+import Votes from "./Votes"
 
 export default function SingleArticle() {
   const { user } = useContext(UserContext)
@@ -49,12 +50,16 @@ export default function SingleArticle() {
       {!user.username ? (
         <>
           <SingleArticleBody article={currArticle} />
+          <Votes article_id={article_id}/>
+          <h2>Comments</h2>
           <Comments articleComments={currArticleComments} setArticleComments={setCurrArticleComments}/>
           <p>Please login to comment</p>
         </>
       ) : (
         <>
           <SingleArticleBody article={currArticle} />
+          <Votes article_id={article_id}/>
+          <h2>Comments</h2>
           <Comments articleComments={currArticleComments} setArticleComments={setCurrArticleComments}/>
         </>
       )}
