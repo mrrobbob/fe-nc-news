@@ -11,3 +11,7 @@ export function getAllArticles () {
 export function getArticleById (articleId) {
   return newsApi.get(`/articles/${articleId}`)
 }
+
+export function getCommentsByArticleId (articleId) {
+  return newsApi.get(`/articles/${articleId}/comments`)
+}

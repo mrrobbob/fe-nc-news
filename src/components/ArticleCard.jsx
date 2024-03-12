@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import moment from "moment"
+import { formatDate } from "../utils/utils"
 
 export default function ArticleCard ({article}) {
   return (
@@ -8,7 +9,7 @@ export default function ArticleCard ({article}) {
         <h2>{article.title}</h2>
       </Link>
       <h3>By {article.author} on the topic of {article.topic}</h3>
-      <h3>Published on {moment(article.created_at).format("Do MMM YYYY")}</h3>
+      <h3>Published on {formatDate(article.created_at)}</h3>
     </>
   )
 }
