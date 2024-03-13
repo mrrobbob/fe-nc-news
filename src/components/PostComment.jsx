@@ -7,20 +7,22 @@ export default function PostComment ({article_id, setArticleComments}) {
   const [newComment, setNewComment] = useState()
   const [error, setError] = useState(null)
   const [posted, setPosted] = useState(false)
+  const [canPost, setCanPost] = useState(true)
 
   function handleSubmit (e) {
     e.preventDefault()
     setPosted(false)
+    setCanPost(false)
     postComment(user, newComment, article_id)
     .then((comment) => {
       setNewComment("")
       setArticleComments((currComments) => {
-        const copy = [...currComments]
-        copy.unshift(comment)
+        const copy = [comment ,...currComments]
         return copy
       })
       setPosted(true)
       setError(false)
+      setCanPost(true)
     })
     .catch((err) => {
       setError(true)
@@ -40,7 +42,7 @@ export default function PostComment ({article_id, setArticleComments}) {
         required
         />
       <p>as {user}</p>
-      <button type="submit" onClick={handleSubmit}>Post</button>
+      <button type="submit" onClick={handleSubmit} disabled={!canPost}>Post</button>
       <p>{posted ? "Comment posted" : null}</p>
       <p>{error ? "Error posting comment" : null}</p>
     </form>

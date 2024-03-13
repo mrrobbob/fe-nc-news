@@ -30,11 +30,14 @@ export function getAllUsers () {
   return newsApi.get("/users")
 }
 
-export function postComment (username, body, article_id) {
+export function postComment (username, body, articleId) {
   const postBody = {
     username,
     body
   }
+  return newsApi.post(`/articles/${articleId}/comments`, {newComment: postBody})
+}
 
-  return newsApi.post(`/articles/${article_id}/comments`, {newComment: postBody})
+export function deleteComment (commentId) {
+  return newsApi.delete(`/comments/${commentId}`)
 }
