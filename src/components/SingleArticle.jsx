@@ -7,6 +7,7 @@ import { UserContext } from "../contexts/UserContext"
 import SingleArticleBody from "./SingleArticleBody"
 import Comments from "./Comments"
 import Votes from "./Votes"
+import PostComment from "./PostComment"
 
 export default function SingleArticle() {
   const { user } = useContext(UserContext)
@@ -34,7 +35,7 @@ export default function SingleArticle() {
       .catch((err) => {
         setError(err.message)
       })
-  }, [article_id])
+  }, [article_id, currArticleComments])
 
   if (error) {
     return <NotFound err={error} />
@@ -47,18 +48,19 @@ export default function SingleArticle() {
 
   return (
     <>
-      {!user.username ? (
+      {!user ? (
         <>
           <SingleArticleBody article={currArticle} />
           <Votes article_id={article_id}/>
+          <p>Please login to comment</p>
           <h2>Comments</h2>
           <Comments articleComments={currArticleComments} setArticleComments={setCurrArticleComments}/>
-          <p>Please login to comment</p>
         </>
       ) : (
         <>
           <SingleArticleBody article={currArticle} />
           <Votes article_id={article_id}/>
+          <PostComment article_id={article_id} setArticleComments={setCurrArticleComments}/>
           <h2>Comments</h2>
           <Comments articleComments={currArticleComments} setArticleComments={setCurrArticleComments}/>
         </>

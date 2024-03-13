@@ -25,3 +25,16 @@ export function patchArticleVotesDec (articleId) {
   const patchObj = {inc_votes: -1}
   return newsApi.patch(`/articles/${articleId}`, {modifier: patchObj})
 }
+
+export function getAllUsers () {
+  return newsApi.get("/users")
+}
+
+export function postComment (username, body, article_id) {
+  const postBody = {
+    username,
+    body
+  }
+
+  return newsApi.post(`/articles/${article_id}/comments`, {newComment: postBody})
+}
