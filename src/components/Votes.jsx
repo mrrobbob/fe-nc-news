@@ -10,7 +10,6 @@ export default function Votes({ article_id }) {
     getArticleById(article_id)
       .then(({ data: { article } }) => {
         setVotes(article.votes)
-        console.log(votes)
       })
   }, [article_id])
 
@@ -21,7 +20,6 @@ export default function Votes({ article_id }) {
     }
 
     setVotes((votes) => {
-      console.log(votes, "here")
       return votes + 1
     })
 
@@ -43,7 +41,6 @@ export default function Votes({ article_id }) {
     }
 
     setVotes((votes) => {
-      console.log(votes, "here")
       return votes - 1
     })
 
@@ -60,13 +57,9 @@ export default function Votes({ article_id }) {
 
   return (
     <>
-      <button onClick={() => {
-        handleVoteInc()
-      }}>Upvote {String(votes)}</button>
+      <button onClick={handleVoteInc}>Upvote {String(votes)}</button>
 
-      <button onClick={() => {
-        handleVoteDec()
-      }}>Downvote {String(votes)}</button>
+      <button onClick={handleVoteDec}>Downvote {String(votes)}</button>
 
       {hasVoted ? (
         <p>You voted!</p>

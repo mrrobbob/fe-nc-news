@@ -3,17 +3,19 @@ import { useContext } from "react"
 import { UserContext } from "../contexts/UserContext"
 
 export default function Header() {
-  const { user, isLoggedIn } = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   return (
     <nav>
       <Link to="/">
         NC news
       </Link>
-      {isLoggedIn ? (
-        <Link to="/post">
-          Post an Article
-        </Link>
+      {user ? (
+        <><p>Logged in as {user}</p>
+          <Link to="/post">
+            Post an Article
+          </Link></>
+
       ) : <p>Please log in to post</p>}
       {Boolean(user.username) ? (
         <Link to="/account">
