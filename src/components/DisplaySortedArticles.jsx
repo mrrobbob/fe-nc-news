@@ -1,14 +1,28 @@
 import ArticleCard from "./ArticleCard"
 import { getArticlesByTopic } from "../utils/api"
+import { useState } from "react"
+import NotFound from "./NotFound"
 
-export default function DisplaySortedArticles({articles, setCriterion, setSortOrder, setArticles, criterion, sortOrder, topic=""}) {
+export default function DisplaySortedArticles({articles, setCriterion, setSortOrder, setArticles, criterion, sortOrder, topic="", setSearchParams}) {
+  const [error, setError] = useState(null)
 
   function handleSubmit (e) {
     e.preventDefault()
+    setSearchParams({
+      sort_by: criterion,
+      order: sortOrder
+    })
     getArticlesByTopic(topic, criterion, sortOrder)
     .then(({data: {articles}}) => {
       setArticles(articles)
     })
+    .catch((err) => {
+      setError(err)
+    })
+  }
+
+  if (error) {
+    return <NotFound err={"Error loading articles"}/>
   }
 
   return (

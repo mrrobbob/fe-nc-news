@@ -1,15 +1,15 @@
 import { useContext } from "react"
 import { UserContext } from "../contexts/UserContext"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export default function UserCard ({user: {username, name, avatar_url}}) {
-
+  const navigate = useNavigate()
   const user = useContext(UserContext)
 
   function handleClick (e) {
     user.setUser(username)
     e.target.innterHTML = "Logged in"
-    console.log(user);
+    navigate(-1)
   }
 
   return (

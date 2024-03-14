@@ -4,9 +4,11 @@ import { getArticlesByTopic } from "../utils/api"
 import NotFound from "./NotFound"
 import Loading from "./Loading"
 import DisplaySortedArticles from "./DisplaySortedArticles"
+import { useSearchParams } from "react-router-dom"
 
 export default function OneTopic () {
   const {topic} = useParams()
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const [articles, setArticles] = useState({})
   const [isLoading, setIsLoading] = useState(true)
@@ -43,7 +45,7 @@ export default function OneTopic () {
   }
   else {
     return (
-      <DisplaySortedArticles articles={articles} setCriterion={setCriterion} setSortOrder={setSortOrder} setArticles={setArticles} criterion={criterion} sortOrder={sortOrder} topic={topic}/>
+      <DisplaySortedArticles articles={articles} setCriterion={setCriterion} setSortOrder={setSortOrder} setArticles={setArticles} criterion={criterion} sortOrder={sortOrder} topic={topic} setSearchParams={setSearchParams}/>
     )
   }
 }
