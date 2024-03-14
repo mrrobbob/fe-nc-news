@@ -16,13 +16,8 @@ export function getCommentsByArticleId (articleId) {
   return newsApi.get(`/articles/${articleId}/comments`)
 }
 
-export function patchArticleVotesInc (articleId) {
-  const patchObj = {inc_votes: 1}
-  return newsApi.patch(`/articles/${articleId}`, {modifier: patchObj})
-}
-
-export function patchArticleVotesDec (articleId) {
-  const patchObj = {inc_votes: -1}
+export function patchArticleVotes (articleId, quantity) {
+  const patchObj = {inc_votes: quantity}
   return newsApi.patch(`/articles/${articleId}`, {modifier: patchObj})
 }
 

@@ -19,7 +19,7 @@ export default function TopicsNav () {
     <Loading/> 
   ) : (
     <ul>
-      <p>Filter by topic</p>
+      <h2>Articles by topic</h2>
       <Link to={"/"}>All Articles </Link>
       {topics.map((topic) => {
         return (

@@ -37,6 +37,9 @@ export default function PostComment ({article_id, setArticleComments}) {
         value={newComment}
         onChange={(e) => {
           setNewComment(e.target.value)
+          if (newComment === "") {
+            setCanPost(false)
+          }
         }}
         rows={4}
         required

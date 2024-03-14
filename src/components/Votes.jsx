@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
-import { getArticleById, patchArticleVotesInc, patchArticleVotesDec } from "../utils/api"
+import { getArticleById, patchArticleVotes } from "../utils/api"
 
 export default function Votes({ article_id }) {
   const [votes, setVotes] = useState(0)
-  const [hasVoted, setHasVoted] = useState(false)
+  const [hasUpvoted, setHasUpvoted] = useState(false)
+  const [hasDownvoted, setHasDownvoted] = useState(false)
   const [error, setError] = useState(null)
 
   useEffect(() => {
@@ -14,44 +15,62 @@ export default function Votes({ article_id }) {
   }, [article_id])
 
   function handleVoteInc() {
-
-    if (hasVoted) {
-      return
+    let quantity = 1
+    if (hasUpvoted) {
+      quantity = -1
     }
-
+    if (hasDownvoted) {
+      setHasDownvoted(false)
+      quantity = 2
+    }
     setVotes((votes) => {
-      return votes + 1
+      return votes + quantity
     })
-
-    patchArticleVotesInc(article_id)
+    patchArticleVotes(article_id, quantity)
       .catch((err) => {
         setVotes((votes) => {
-          return votes - 1
+          return votes + quantity
         })
       })
       .then(() => {
-        setHasVoted(true)
+        if (hasUpvoted) {
+          setHasUpvoted(false)
+        }
+        else {
+          setHasUpvoted(true)
+          setHasDownvoted(false)
+        }
       })
   }
 
   function handleVoteDec() {
-
-    if (hasVoted) {
-      return
+    let quantity = -1
+    console.log(hasDownvoted)
+    if (hasDownvoted) {
+      quantity = 1
     }
 
+    if (hasUpvoted) {
+      setHasUpvoted(false)
+      quantity = -2
+    }
     setVotes((votes) => {
-      return votes - 1
+      return votes + quantity
     })
-
-    patchArticleVotesDec(article_id)
+    patchArticleVotes(article_id, quantity)
       .catch((err) => {
         setVotes((votes) => {
-          return votes + 1
+          return votes + quantity
         })
       })
       .then(() => {
-        setHasVoted(true)
+        if (hasDownvoted) {
+          setHasDownvoted(false)
+        }
+        else {
+          setHasDownvoted(true)
+          setHasUpvoted(false)
+        }
       })
   }
 
@@ -61,7 +80,7 @@ export default function Votes({ article_id }) {
 
       <button onClick={handleVoteDec}>Downvote {String(votes)}</button>
 
-      {hasVoted ? (
+      {hasDownvoted || hasUpvoted ? (
         <p>You voted!</p>
       ) : null}
 
