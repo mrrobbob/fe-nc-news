@@ -15,7 +15,8 @@ export default function SingleArticle() {
   const [currArticle, setCurrArticle] = useState({})
   const [currArticleComments, setCurrArticleComments] = useState({})
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [articleError, setArticleError] = useState(null)
+  const [commentError, setCommentError] = useState(null)
 
   useEffect(() => {
     getArticleById(article_id)
@@ -23,7 +24,7 @@ export default function SingleArticle() {
         setCurrArticle(article)
       })
       .catch((err) => {
-        setError(err.message)
+        setArticleError(err)
       })
       .then(() => {
         return getCommentsByArticleId(article_id)
@@ -33,12 +34,21 @@ export default function SingleArticle() {
         setIsLoading(false)
       })
       .catch((err) => {
-        setError(err.message)
+        setCommentError(err)
       })
   }, [article_id, currArticleComments])
 
-  if (error) {
-    return <NotFound err={error} />
+  if (articleError) {
+    if (articleError.response.status === 404) {
+      return <NotFound err={"Article doesn't exist!"} />
+    }
+    else {
+      return <NotFound err={error.message}/>
+    }
+  }
+
+  if (commentError) {
+    return <NotFound err={"Error loading comments"}/>
   }
 
   if (isLoading) {
