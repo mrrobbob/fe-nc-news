@@ -41,3 +41,11 @@ export function postComment (username, body, articleId) {
 export function deleteComment (commentId) {
   return newsApi.delete(`/comments/${commentId}`)
 }
+
+export function getArticlesByTopic (topic, sortBy, order) {
+  return newsApi.get(`/articles?topic=${topic}&sort_by=${sortBy}&order=${order}`)
+}
+
+export function getTopics () {
+  return newsApi.get("/topics")
+}
