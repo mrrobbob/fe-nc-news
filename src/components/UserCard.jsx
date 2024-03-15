@@ -15,7 +15,7 @@ export default function UserCard ({user: {username, name, avatar_url}}) {
   return (
     <div className="user-card">
       <h2>{username}</h2>
-      <h3>Log in as <button onClick={handleClick}>{username}</button></h3>
+      <h3><button onClick={handleClick}>Log In</button></h3>
       <p>{name}</p>
       <img src={avatar_url} width={60}/>
     </div>

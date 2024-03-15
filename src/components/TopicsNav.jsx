@@ -18,7 +18,7 @@ export default function TopicsNav () {
   return isLoading ? (
     <Loading/> 
   ) : (
-    <ul id="topics">
+    <div id="topics">
       <h2>Browse by Topic</h2>
       <Link to={"/"}><h4>All Articles</h4> </Link>
       {topics.map((topic) => {
@@ -28,6 +28,6 @@ export default function TopicsNav () {
           </Link>
         )
       })}
-    </ul>
+    </div>
   )
 }

@@ -7,9 +7,9 @@ export default function Header() {
 
   return (
     <>
-    <ul id="header">
+    <div id="header">
       <li><Link to="/">
-        <h2>NC news</h2>
+        <h2>NC News</h2>
       </Link></li>
       <li className="right">{user ? (
           <Link to="/post">
@@ -19,16 +19,15 @@ export default function Header() {
       
       
       <li className="right">{user ? (
-        <Link to="/account">
-          <p>{user}</p>
-        </Link>
+        
+          <p>Logged in as <Link to="/account">{user}</Link></p>
       ) : (
         <Link to="/account">
           <p>Sign In</p>
         </Link>
       )}</li>
 
-    </ul>
+    </div>
     </>
   )
 }

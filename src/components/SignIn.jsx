@@ -17,12 +17,12 @@ export default function SignIn () {
   }, [])
 
   return isLoading ? <Loading /> : (
-    <ul>
+    <div id="user-container">
       {users.map((user, i) => {
         return (
-          <UserCard user={user} key={i}/>
+          <UserCard className="user-card" user={user} key={i} />
         )
       })}
-    </ul>
+    </div>
   )
 }
