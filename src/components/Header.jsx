@@ -6,28 +6,29 @@ export default function Header() {
   const { user } = useContext(UserContext)
 
   return (
-    <nav>
-      <Link to="/">
-        NC news
-      </Link>
-      {user ? (
-        <><p>Logged in as {user}</p>
+    <>
+    <ul id="header">
+      <li><Link to="/">
+        <h2>NC news</h2>
+      </Link></li>
+      <li className="right">{user ? (
           <Link to="/post">
-            Post an Article
-          </Link></>
-
-      ) : <p>Please log in to post</p>}
-      {Boolean(user.username) ? (
+            <p>Post an Article</p>
+          </Link>
+      ) : <p>Sign in to post</p>}</li>
+      
+      
+      <li className="right">{user ? (
         <Link to="/account">
-          <p>{user.username}</p>
-          <img src={user.avatar_url} />
+          <p>{user}</p>
         </Link>
       ) : (
         <Link to="/account">
           <p>Sign In</p>
         </Link>
-      )}
+      )}</li>
 
-    </nav>
+    </ul>
+    </>
   )
 }

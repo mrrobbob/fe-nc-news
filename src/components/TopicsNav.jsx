@@ -18,13 +18,13 @@ export default function TopicsNav () {
   return isLoading ? (
     <Loading/> 
   ) : (
-    <ul>
-      <h2>Articles by topic</h2>
-      <Link to={"/"}>All Articles </Link>
+    <ul id="topics">
+      <h2>Browse by Topic</h2>
+      <Link to={"/"}><h4>All Articles</h4> </Link>
       {topics.map((topic) => {
         return (
           <Link to={`/articles/topics/${topic.slug}`} key={topic.slug}>
-            {topic.slug + " "}
+            <h4>{topic.slug + " "}</h4>
           </Link>
         )
       })}

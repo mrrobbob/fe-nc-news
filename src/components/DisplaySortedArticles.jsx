@@ -44,7 +44,7 @@ export default function DisplaySortedArticles({articles, setCriterion, setSortOr
         </select>
         <button type="submit">Sort</button>
       </form>
-      <ul>
+      <ul className="articles-list">
         {articles.map((article) => {
           return (
             <ArticleCard article={article} key={article.article_id} />

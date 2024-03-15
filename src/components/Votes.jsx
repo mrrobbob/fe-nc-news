@@ -12,6 +12,9 @@ export default function Votes({ article_id }) {
       .then(({ data: { article } }) => {
         setVotes(article.votes)
       })
+      .catch((err) => {
+        setError(err)
+      })
   }, [article_id])
 
   function handleVoteInc() {
@@ -75,17 +78,17 @@ export default function Votes({ article_id }) {
   }
 
   return (
-    <>
-      <button onClick={handleVoteInc}>Upvote {String(votes)}</button>
-
-      <button onClick={handleVoteDec}>Downvote {String(votes)}</button>
+    <div id="votes">
+      <button onClick={handleVoteInc}>Upvote</button>
+      <p>{votes}</p>
+      <button onClick={handleVoteDec}>Downvote</button>
 
       {hasDownvoted || hasUpvoted ? (
-        <p>You voted!</p>
+        <p id="if-voted">You voted!</p>
       ) : null}
 
       {error ? <p>There was an error communicating to the server</p> : null}
-    </>
+    </div>
 
   )
 }
